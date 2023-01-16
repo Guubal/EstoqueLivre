@@ -1,2 +1,5 @@
-Mauricio Lopes de Oliveira
-Lucas Liudi Tamashiro
+Mauricio Lopes de Oliveira  
+ 
+Lucas Liudi Tamashiro   
+  
+Rafael De Oliveira Smith   
