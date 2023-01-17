@@ -8,7 +8,7 @@ public class Menu {
         String selectors[] = {"Cadastrar", "Listar produtos", "Buscar Produto", "Atualizar produto", "Apagar produto","Sair"};
         int opcao;
 
-        while (true) { 
+        while (true) {
             out.println("*".repeat(40));
             out.printf("%-10s  %s \n", "", "ESTOQUE LIVRE");
             out.println("*".repeat(40));
