@@ -95,10 +95,10 @@ public class Menu {
         quantidade = entrada.nextInt();
         out.print("Digite o valor do produto: R$");
         preco = entrada.nextFloat();
-        out.print("Digite a Marca do produto: (NAO USAR ESPACOS POR ENQUANTO)");
+        out.print("Digite a Marca do produto: ");
         marca = entrada.next();
         entrada.nextLine();
-        out.print("Digite a categoria do produto: (NAO USAR ESPACOS POR ENQUANTO)");
+        out.print("Digite a categoria do produto: ");
         categoria = entrada.next();
         entrada.nextLine();
 
