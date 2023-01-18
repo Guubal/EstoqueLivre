@@ -9,9 +9,24 @@ import java.util.ArrayList;
 public class ProdutoController implements ProdutoRepository {
     private ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 
-    @Override
-    public void procurarProduto(String nome) {
+    public Produto buscarNaLista(int codigoProduto) {
+        for (var produto : listaProdutos) {
+            if (produto.CodProduto() == codigoProduto) {
+                return produto;
+            }
+        }
+        return null;
+    }
 
+    @Override
+    public void procurarProduto(int codigoProduto) {
+        var produto = buscarNaLista(codigoProduto);
+
+        if (produto != null) {
+            produto.Visualizar();
+        } else {
+            out.println("Código de produto " + codigoProduto + " não foi encontrado.");
+        }
     }
 
     @Override

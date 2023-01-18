@@ -55,6 +55,9 @@ public class Menu {
                 }
                 case 3 -> {
                     out.println("Buscar por produto\n\n");
+                    out.print("Informe o código do produto: ");
+                    int codProduto = entrada.nextInt();
+                    produtos.procurarProduto(codProduto);
                     keyPress();
                 }
                 case 4 -> {
