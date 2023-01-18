@@ -9,8 +9,7 @@ import model.ProdutoAlimento;
 import model.ProdutoBebida;
 
 public class Menu {
-    static ProdutoController produtos = new ProdutoController();
-    static Scanner entrada = new Scanner(System.in);
+
     static int quantidade;
     static String nome;
     static String marca;
@@ -18,6 +17,10 @@ public class Menu {
     static float preco;
     static float peso;
     static float ml;
+
+    static ProdutoController produtos = new ProdutoController();
+    static Scanner entrada = new Scanner(System.in);
+    
     public static void main(String[] args) {
 
         String selectors[] = {"Cadastrar", "Listar produtos", "Buscar Produto", "Atualizar produto", "Apagar produto", "Sair"};
