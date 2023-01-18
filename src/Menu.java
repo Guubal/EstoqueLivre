@@ -90,14 +90,17 @@ public class Menu {
 
         out.print("Digite o nome do produto: ");
         nome = entrada.next();
+        entrada.nextLine();
         out.print("Digite a quantidade do produto: ");
         quantidade = entrada.nextInt();
         out.print("Digite o valor do produto: R$");
         preco = entrada.nextFloat();
         out.print("Digite a Marca do produto: (NAO USAR ESPACOS POR ENQUANTO)");
         marca = entrada.next();
+        entrada.nextLine();
         out.print("Digite a categoria do produto: (NAO USAR ESPACOS POR ENQUANTO)");
         categoria = entrada.next();
+        entrada.nextLine();
 
         switch (tipo){
             case 1 -> {
@@ -108,7 +111,7 @@ public class Menu {
             case 2 -> {
                 out.print("Digite a litragem do produto: ");
                 ml = entrada.nextFloat();
-                produtos.cadastrarProduto(new ProdutoAlimento(nome,marca,categoria,produtos.GerarIDProduto(),quantidade,preco,ml));
+                produtos.cadastrarProduto(new ProdutoBebida(nome,marca,categoria,produtos.GerarIDProduto(),quantidade,preco,ml));
             }
         }
     }
