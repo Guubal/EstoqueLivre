@@ -1,6 +1,6 @@
-package produto;
+package model;
 import static java.lang.System.out;
-public class Produto {
+public abstract class Produto {
     private String nomeProduto, marcaProduto, categoriaProduto;
     private int codProduto, quantidadeProduto;
     private float precoProduto;
@@ -69,12 +69,13 @@ public class Produto {
     }
 
     public void Visualizar(){
-        out.printf("\n");
-        out.printf("*".repeat(40));
-        out.printf("\nProduto : %s", nomeProduto);
-        out.printf("\nPreço : %.2f", precoProduto);
-        out.printf("\nMarca : %s", marcaProduto);
-        out.printf("\nCategoria : %s", categoriaProduto);
-        out.printf("\nCódigo do produto : %d", codProduto);
+
+        out.printf("\n\n");
+        out.printf("-".repeat(40));
+        out.printf("\n%-15s %s","Produto:", nomeProduto);
+        out.printf("\n%-15s %.2f","Preço:", precoProduto);
+        out.printf("\n%-15s %s","Marca:", marcaProduto);
+        out.printf("\n%-15s %s","Categoria:", categoriaProduto);
+        out.printf("\n%-15s %d","Cód Produto:", codProduto);
     }
 }
