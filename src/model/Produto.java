@@ -1,11 +1,13 @@
 package model;
 import static java.lang.System.out;
+
 public abstract class Produto {
     private String nomeProduto, marcaProduto, categoriaProduto;
-    private int codProduto, quantidadeProduto;
+    private int codProduto, quantidadeProduto, tipoProduto;
     private float precoProduto;
 
-    public Produto(String nomeProduto, String marcaProduto, String categoriaProduto, int codProduto, int quantidadeProduto, float precoProduto) {
+    public Produto(int tipoProduto, String nomeProduto, String marcaProduto, String categoriaProduto, int codProduto, int quantidadeProduto, float precoProduto) {
+        this.tipoProduto = tipoProduto;
         this.nomeProduto = nomeProduto;
         this.marcaProduto = marcaProduto;
         this.categoriaProduto = categoriaProduto;
@@ -14,7 +16,16 @@ public abstract class Produto {
         this.precoProduto = precoProduto;
     }
 
-    public int quantidadeProduto() {
+    public int getTipoProduto() {
+        return tipoProduto;
+    }
+
+    public Produto setTipoProduto(int tipoProduto) {
+        this.tipoProduto = tipoProduto;
+        return this;
+    }
+
+    public int getQuantidadeProduto() {
         return quantidadeProduto;
     }
 
@@ -23,7 +34,7 @@ public abstract class Produto {
         return this;
     }
 
-    public String nomeProduto() {
+    public String getNomeProduto() {
         return nomeProduto;
     }
 
@@ -32,7 +43,7 @@ public abstract class Produto {
         return this;
     }
 
-    public String marcaProduto() {
+    public String getMarcaProduto() {
         return marcaProduto;
     }
 
@@ -41,7 +52,7 @@ public abstract class Produto {
         return this;
     }
 
-    public String categoriaProduto() {
+    public String getCategoriaProduto() {
         return categoriaProduto;
     }
 
@@ -50,7 +61,7 @@ public abstract class Produto {
         return this;
     }
 
-    public int CodProduto() {
+    public int getCodProduto() {
         return codProduto;
     }
 
@@ -59,7 +70,7 @@ public abstract class Produto {
         return this;
     }
 
-    public float precoProduto() {
+    public float getPrecoProduto() {
         return precoProduto;
     }
 
@@ -68,14 +79,14 @@ public abstract class Produto {
         return this;
     }
 
-    public void Visualizar(){
+    public void Visualizar() {
 
         out.printf("\n\n");
         out.printf("-".repeat(40));
-        out.printf("\n%-15s %s","Produto:", nomeProduto);
-        out.printf("\n%-15s %.2f","Preço:", precoProduto);
-        out.printf("\n%-15s %s","Marca:", marcaProduto);
-        out.printf("\n%-15s %s","Categoria:", categoriaProduto);
-        out.printf("\n%-15s %d","Cód Produto:", codProduto);
+        out.printf("\n%-15s %s", "Produto:", nomeProduto);
+        out.printf("\n%-15s %.2f", "Preço:", precoProduto);
+        out.printf("\n%-15s %s", "Marca:", marcaProduto);
+        out.printf("\n%-15s %s", "Categoria:", categoriaProduto);
+        out.printf("\n%-15s %d", "Cód Produto:", codProduto);
     }
 }

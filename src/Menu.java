@@ -1,7 +1,7 @@
-
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
 import static java.lang.System.out;
 
 import controller.ProdutoController;
@@ -11,13 +11,10 @@ import model.ProdutoBebida;
 public class Menu {
     static ProdutoController produtos = new ProdutoController();
     static Scanner entrada = new Scanner(System.in);
-    static int quantidade;
-    static String nome;
-    static String marca;
-    static String categoria;
-    static float preco;
-    static float peso;
-    static float ml;
+    static int quantidade, ID, tipo;
+    static String nome, marca, categoria;
+    static float preco, peso, ml;
+
     public static void main(String[] args) {
 
         String selectors[] = {"Cadastrar", "Listar produtos", "Buscar Produto", "Atualizar produto", "Apagar produto", "Sair"};
@@ -45,24 +42,28 @@ public class Menu {
 
             switch (opcao) {
                 case 1 -> {
+                    out.println("\n\nCriar Produtos:\n");
                     cadastrarProdutos();
                     keyPress();
                 }
                 case 2 -> {
-                    out.println("Listar todos os Produtos\n\n");
+                    out.println("\n\nListar todos os Produtos\n");
                     produtos.listarProdutos();
                     keyPress();
                 }
                 case 3 -> {
-                    out.println("Buscar por produto\n\n");
+                    out.println("\n\nBuscar por produto\n");
+                    procurarPorID();
                     keyPress();
                 }
                 case 4 -> {
-                    out.println("Atualizar dados do produto\n\n");
+                    out.println("\n\nAtualizar dados do produto\n");
+                    atualizarProduto();
                     keyPress();
                 }
-                case 5 ->{
-                    out.println("Apagar produto\n\n");
+                case 5 -> {
+                    out.println("\n\nApagar produto\n");
+                    deletarProduto();
                     keyPress();
                 }
                 case 6 -> {
@@ -81,42 +82,87 @@ public class Menu {
     }
 
     public static void cadastrarProdutos() {
-        int tipo;
-        out.println("Criar Produtos:\n\n");
-        do{
+        do {
             out.print("Digite a opção do tipo de produto [1]Alimento [2]Bebida: ");
             tipo = entrada.nextInt();
-        }while (tipo < 1 && tipo > 2);
+        } while (tipo < 1 && tipo > 2);
 
-        out.print("Digite o nome do produto: ");
-        nome = entrada.next();
-        entrada.nextLine();
-        out.print("Digite a quantidade do produto: ");
+        out.print("Nome do produto: ");
+        entrada.skip("\\R?");
+        nome = entrada.nextLine();
+        out.print("Quantidade do produto(UN): ");
         quantidade = entrada.nextInt();
-        out.print("Digite o valor do produto: R$");
+        out.print("Valor do produto(UN): ");
         preco = entrada.nextFloat();
-        out.print("Digite a Marca do produto: ");
-        marca = entrada.next();
-        entrada.nextLine();
-        out.print("Digite a categoria do produto: ");
-        categoria = entrada.next();
-        entrada.nextLine();
+        out.print("Marca do produto: ");
+        entrada.skip("\\R?");
+        marca = entrada.nextLine();
+        out.print("Categoria do produto: ");
+        entrada.skip("\\R?");
+        categoria = entrada.nextLine();
 
-        switch (tipo){
+        switch (tipo) {
             case 1 -> {
-                out.print("Digite o peso do produto: ");
+                out.print("Peso do produto(UN): ");
                 peso = entrada.nextFloat();
-                produtos.cadastrarProduto(new ProdutoAlimento(nome,marca,categoria,produtos.GerarIDProduto(),quantidade,preco,peso));
+                produtos.cadastrarProduto(new ProdutoAlimento(1, nome, marca, categoria, produtos.GerarIDProduto(), quantidade, preco, peso));
             }
             case 2 -> {
-                out.print("Digite a litragem do produto: ");
+                out.print("Capacidade do produto(ML): ");
                 ml = entrada.nextFloat();
-                produtos.cadastrarProduto(new ProdutoBebida(nome,marca,categoria,produtos.GerarIDProduto(),quantidade,preco,ml));
+                produtos.cadastrarProduto(new ProdutoBebida(2, nome, marca, categoria, produtos.GerarIDProduto(), quantidade, preco, ml));
             }
         }
     }
 
-    public static void keyPress(){
+    public static void procurarPorID() {
+        out.print("Digite o ID do produto: ");
+        ID = entrada.nextInt();
+        produtos.procurarProduto(ID);
+    }
+
+    public static void atualizarProduto() {
+        out.print("Digete o ID do produto: ");
+        ID = entrada.nextInt();
+
+        if (produtos.buscarNaCollection(ID) != null) {
+            out.print("Nome do produto: ");
+            entrada.skip("\\R?");
+            nome = entrada.nextLine();
+            out.print("Quantidade do produto(UN): ");
+            quantidade = entrada.nextInt();
+            out.print("Valor do produto(UN): ");
+            preco = entrada.nextFloat();
+            out.print("Marca do produto: ");
+            entrada.skip("\\R?");
+            marca = entrada.nextLine();
+            out.print("Categoria do produto: ");
+            entrada.skip("\\R?");
+            categoria = entrada.nextLine();
+            tipo = produtos.retornaTipo(ID);
+
+            switch (tipo) {
+                case 1 -> {
+                    out.print("Peso do produto(UN): ");
+                    peso = entrada.nextFloat();
+                    produtos.atualizarProduto(new ProdutoAlimento(1, nome, marca, categoria, ID, quantidade, preco, peso));
+                }
+                case 2 -> {
+                    out.print("Capacidade do produto(ML): ");
+                    ml = entrada.nextFloat();
+                    produtos.cadastrarProduto(new ProdutoBebida(2, nome, marca, categoria, ID, quantidade, preco, ml));
+                }
+            }
+        }
+    }
+
+    public static void deletarProduto() {
+        out.print("Digite o ID do produto: ");
+        ID = entrada.nextInt();
+        produtos.deletarProduto(ID);
+    }
+
+    public static void keyPress() {
         try {
             out.println("\n\nPressione Enter para continuar...");
             System.in.read();
