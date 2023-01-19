@@ -16,6 +16,7 @@ public abstract class Produto {
         this.precoProduto = precoProduto;
     }
 
+
     public int getTipoProduto() {
         return tipoProduto;
     }
@@ -85,8 +86,20 @@ public abstract class Produto {
         out.printf("-".repeat(40));
         out.printf("\n%-15s %s", "Produto:", nomeProduto);
         out.printf("\n%-15s %.2f", "Preço:", precoProduto);
+        out.printf("\n%-15s %s", "Quantidade:", quantidadeProduto);
         out.printf("\n%-15s %s", "Marca:", marcaProduto);
         out.printf("\n%-15s %s", "Categoria:", categoriaProduto);
         out.printf("\n%-15s %d", "Cód Produto:", codProduto);
+    }
+
+    public void VisualizarAtualizar() {
+
+        out.printf("\n\n");
+        out.printf("-".repeat(40));
+        out.printf("\n[1]%-15s %s", "Produto:", nomeProduto);
+        out.printf("\n[2]%-15s %.2f", "Preço:", precoProduto);
+        out.printf("\n[3]%-15s %s", "Quantidade:", quantidadeProduto);
+        out.printf("\n[4]%-15s %s", "Marca:", marcaProduto);
+        out.printf("\n[5]%-15s %s", "Categoria:", categoriaProduto);
     }
 }

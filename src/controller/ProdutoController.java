@@ -27,6 +27,18 @@ public class ProdutoController implements ProdutoRepository {
     }
 
     @Override
+    public void listarProdutosAtualizar(int ID) {
+        var produto = buscarNaCollection(ID);
+
+        if (produto != null) {
+            produto.VisualizarAtualizar();
+        } else {
+            out.printf("O produto de ID %d não foi encontrado!", ID);
+            ;
+        }
+    }
+
+    @Override
     public void cadastrarProduto(Produto produto) {
         listaProdutos.add(produto);
         out.printf("\nO produto: %s foi criado com sucesso!\n", produto.getNomeProduto());

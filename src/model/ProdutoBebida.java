@@ -23,5 +23,11 @@ public class ProdutoBebida extends Produto {
         super.Visualizar();
         out.printf("\n%-15s %.2f\n", "ML:", ml);
         out.println("-".repeat(40));
+    }@Override
+
+    public void VisualizarAtualizar() {
+        super.VisualizarAtualizar();
+        out.printf("\n[6]%-15s %.2f\n", "ML:", ml);
+        out.println("-".repeat(40));
     }
 }

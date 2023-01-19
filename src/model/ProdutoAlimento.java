@@ -8,8 +8,6 @@ public class ProdutoAlimento extends Produto {
         super(tipoProduto, nomeProduto, marcaProduto, categoriaProduto, codProduto, quantidadeProduto, precoProduto);
         this.pesoAlimento = pesoAlimento;
     }
-
-
     public float pesoAlimento() {
         return pesoAlimento;
     }
@@ -23,6 +21,13 @@ public class ProdutoAlimento extends Produto {
     public void Visualizar(){
         super.Visualizar();
         out.printf("\n%-15s %.2f\n","Peso:", pesoAlimento);
+        out.println("-".repeat(40));
+    }
+
+    @Override
+    public void VisualizarAtualizar(){
+        super.VisualizarAtualizar();
+        out.printf("\n[6]%-15s %.2f\n","Peso:", pesoAlimento);
         out.println("-".repeat(40));
     }
 }

@@ -20,9 +20,13 @@ public class Menu {
         String selectors[] = {"Cadastrar", "Listar produtos", "Buscar Produto", "Atualizar produto", "Apagar produto", "Sair"};
         int opcao;
 
+        //PARA TESTES:
+        produtos.cadastrarProduto(new ProdutoAlimento(1, "Arroz", "Camil", "Não Perecivel", produtos.GerarIDProduto(), 10, 17, 15));
 
+        produtos.cadastrarProduto(new ProdutoBebida(1, "Coca-Cola", "Coca-Cola", "Refrigerante", produtos.GerarIDProduto(), 8, 9, 2000));
+        clearConsole();
         while (true) {
-            out.println("*".repeat(40));
+            out.println("\n" + "*".repeat(40));
             out.printf("%-10s  %s \n", "", "ESTOQUE LIVRE");
             out.println("*".repeat(40));
 
@@ -39,32 +43,36 @@ public class Menu {
                 entrada.nextInt();
                 opcao = 0;
             }
-
+            clearConsole();
             switch (opcao) {
                 case 1 -> {
-                    out.println("\n\nCriar Produtos:\n");
+                    centerText("CADASTRAR PRODUTO");
                     cadastrarProdutos();
-                    keyPress();
+                    clearConsole();
                 }
                 case 2 -> {
-                    out.println("\n\nListar todos os Produtos\n");
+                    out.println("\n\nListar todos os Produtos");
                     produtos.listarProdutos();
                     keyPress();
+                    clearConsole();
                 }
                 case 3 -> {
-                    out.println("\n\nBuscar por produto\n");
+                    out.println("\n\nBuscar por produto");
                     procurarPorID();
                     keyPress();
+                    clearConsole();
                 }
                 case 4 -> {
-                    out.println("\n\nAtualizar dados do produto\n");
+                    out.println("\n\nAtualizar dados do produto");
                     atualizarProduto();
                     keyPress();
+                    clearConsole();
                 }
                 case 5 -> {
-                    out.println("\n\nApagar produto\n");
+                    out.println("\n\nApagar produto");
                     deletarProduto();
                     keyPress();
+                    clearConsole();
                 }
                 case 6 -> {
                     out.println("\nObrigado!");
@@ -74,6 +82,7 @@ public class Menu {
                 default -> {
                     out.println("\nOpção Inválida!\n");
                     keyPress();
+                    clearConsole();
                 }
 
             }
@@ -83,35 +92,44 @@ public class Menu {
 
     public static void cadastrarProdutos() {
         do {
-            out.print("Digite a opção do tipo de produto [1]Alimento [2]Bebida: ");
+            out.println("=".repeat(40));
+            out.printf("%6d %-3s %s \n", 1, " ", "ALIMENTO");
+            out.printf("%6d %-3s %s \n", 2, " ", "BEBIDA");
+            out.printf("%6d %-3s %s \n", 3, " ", "VOLTAR");
+            out.println("=".repeat(40));
+
+            out.print("Digite uma opção: ");
             tipo = entrada.nextInt();
+
         } while (tipo < 1 && tipo > 2);
+        if (tipo != 3) {
+            out.print("Nome do produto: ");
+            entrada.skip("\\R?");
+            nome = entrada.nextLine();
+            out.print("Quantidade do produto(UN): ");
+            quantidade = entrada.nextInt();
+            out.print("Valor do produto(UN): ");
+            preco = entrada.nextFloat();
+            out.print("Marca do produto: ");
+            entrada.skip("\\R?");
+            marca = entrada.nextLine();
+            out.print("Categoria do produto: ");
+            entrada.skip("\\R?");
+            categoria = entrada.nextLine();
 
-        out.print("Nome do produto: ");
-        entrada.skip("\\R?");
-        nome = entrada.nextLine();
-        out.print("Quantidade do produto(UN): ");
-        quantidade = entrada.nextInt();
-        out.print("Valor do produto(UN): ");
-        preco = entrada.nextFloat();
-        out.print("Marca do produto: ");
-        entrada.skip("\\R?");
-        marca = entrada.nextLine();
-        out.print("Categoria do produto: ");
-        entrada.skip("\\R?");
-        categoria = entrada.nextLine();
-
-        switch (tipo) {
-            case 1 -> {
-                out.print("Peso do produto(UN): ");
-                peso = entrada.nextFloat();
-                produtos.cadastrarProduto(new ProdutoAlimento(1, nome, marca, categoria, produtos.GerarIDProduto(), quantidade, preco, peso));
+            switch (tipo) {
+                case 1 -> {
+                    out.print("Peso do produto(UN): ");
+                    peso = entrada.nextFloat();
+                    produtos.cadastrarProduto(new ProdutoAlimento(1, nome, marca, categoria, produtos.GerarIDProduto(), quantidade, preco, peso));
+                }
+                case 2 -> {
+                    out.print("Capacidade do produto(ML): ");
+                    ml = entrada.nextFloat();
+                    produtos.cadastrarProduto(new ProdutoBebida(2, nome, marca, categoria, produtos.GerarIDProduto(), quantidade, preco, ml));
+                }
             }
-            case 2 -> {
-                out.print("Capacidade do produto(ML): ");
-                ml = entrada.nextFloat();
-                produtos.cadastrarProduto(new ProdutoBebida(2, nome, marca, categoria, produtos.GerarIDProduto(), quantidade, preco, ml));
-            }
+            keyPress();
         }
     }
 
@@ -122,17 +140,22 @@ public class Menu {
     }
 
     public static void atualizarProduto() {
+        int opc;
         out.print("Digete o ID do produto: ");
         ID = entrada.nextInt();
+        produtos.listarProdutosAtualizar(ID);
+
+        out.print("Digete a opcão que deseja alterar: ");
+        opc = entrada.nextInt();
 
         if (produtos.buscarNaCollection(ID) != null) {
             out.print("Nome do produto: ");
             entrada.skip("\\R?");
             nome = entrada.nextLine();
-            out.print("Quantidade do produto(UN): ");
-            quantidade = entrada.nextInt();
             out.print("Valor do produto(UN): ");
             preco = entrada.nextFloat();
+            out.print("Quantidade do produto(UN): ");
+            quantidade = entrada.nextInt();
             out.print("Marca do produto: ");
             entrada.skip("\\R?");
             marca = entrada.nextLine();
@@ -169,5 +192,26 @@ public class Menu {
         } catch (IOException e) {
             out.println("Você pressionou uma tecla errada.");
         }
+    }
+
+    public static void clearConsole() {
+        try {
+            if (System.getProperty("os.name").contains("Windows")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033\143");
+            }
+        } catch (IOException | InterruptedException ex) {
+        }
+    }
+
+    public static void centerText(String txt) {
+        int qnt = 20 - txt.length() / 2;
+        String e = "";
+        for (int i = 0; i < qnt; i++) {
+            e += " ";
+        }
+        out.println("\n");
+        out.println(e + txt);
     }
 }
