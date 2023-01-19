@@ -63,19 +63,19 @@ public class Menu {
                     clearConsole();
                 }
                 case 4 -> {
-                    centerText("Atualizar dados do produto");
+                    centerText("ATUALIZAR DADOS DO PRODDUTO");
                     atualizarProduto();
                     keyPress();
                     clearConsole();
                 }
                 case 5 -> {
-                    centerText("Apagar produto");
+                    centerText("APAGAR PRODUTO");
                     deletarProduto();
                     keyPress();
                     clearConsole();
                 }
                 case 6 -> {
-                    centerText("Obrigado!");
+                    centerText("O ESTOQUE LIVRE AGRADECE!");
                     entrada.close();
                     System.exit(0);
                 }
