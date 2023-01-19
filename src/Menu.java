@@ -122,7 +122,7 @@ public class Menu {
     }
 
     public static void atualizarProduto() {
-        out.print("Digete o ID do produto: ");
+        out.print("Digite o ID do produto: ");
         ID = entrada.nextInt();
 
         if (produtos.buscarNaCollection(ID) != null) {
