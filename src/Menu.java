@@ -40,9 +40,10 @@ public class Menu {
                 opcao = entrada.nextInt();
             } catch (InputMismatchException e) {
                 out.print("Digite um valor inteiro: ");
-                entrada.nextInt();
+                entrada.nextLine();
                 opcao = 0;
             }
+
             clearConsole();
             switch (opcao) {
                 case 1 -> {
@@ -146,6 +147,7 @@ public class Menu {
         keyPress();
 
     }
+
 
     public static void atualizarProduto() {
         int opc;
