@@ -23,11 +23,11 @@ public class Menu {
         //PARA TESTES:
         produtos.cadastrarProduto(new ProdutoAlimento(1, "Arroz", "Camil", "Não Perecivel", produtos.GerarIDProduto(), 10, 17, 15));
 
-        produtos.cadastrarProduto(new ProdutoBebida(1, "Coca-Cola", "Coca-Cola", "Refrigerante", produtos.GerarIDProduto(), 8, 9, 2000));
+        produtos.cadastrarProduto(new ProdutoBebida(2, "Coca-Cola", "Coca-Cola", "Refrigerante", produtos.GerarIDProduto(), 8, 9, 2000));
         clearConsole();
         while (true) {
             out.println("\n" + "*".repeat(40));
-            out.printf("%-10s  %s \n", "", "ESTOQUE LIVRE");
+            centerText("ESTOQUE LIVRE");
             out.println("*".repeat(40));
 
             for (int c = 0; c < selectors.length; c++) {
@@ -52,7 +52,7 @@ public class Menu {
                 }
                 case 2 -> {
                     out.println("\n\nListar todos os Produtos");
-                    produtos.listarProdutos();
+                    listarProduto();
                     keyPress();
                     clearConsole();
                 }
@@ -139,41 +139,74 @@ public class Menu {
         produtos.procurarProduto(ID);
     }
 
+    public static void listarProduto(){
+        produtos.listarProdutos();
+
+    }
+
     public static void atualizarProduto() {
         int opc;
         out.print("Digete o ID do produto: ");
         ID = entrada.nextInt();
         produtos.listarProdutosAtualizar(ID);
+        var atualizarItem = produtos.buscarNaCollection(ID);
+
+        var atualizarItemUN = produtos.buscarNaCollection(ID);
 
         out.print("Digete a opcão que deseja alterar: ");
         opc = entrada.nextInt();
 
-        if (produtos.buscarNaCollection(ID) != null) {
-            out.print("Nome do produto: ");
-            entrada.skip("\\R?");
-            nome = entrada.nextLine();
-            out.print("Valor do produto(UN): ");
-            preco = entrada.nextFloat();
-            out.print("Quantidade do produto(UN): ");
-            quantidade = entrada.nextInt();
-            out.print("Marca do produto: ");
-            entrada.skip("\\R?");
-            marca = entrada.nextLine();
-            out.print("Categoria do produto: ");
-            entrada.skip("\\R?");
-            categoria = entrada.nextLine();
-            tipo = produtos.retornaTipo(ID);
 
-            switch (tipo) {
+        if (produtos.buscarNaCollection(ID) != null) {
+
+            tipo = atualizarItem.getTipoProduto();
+
+            switch (opc){
                 case 1 -> {
-                    out.print("Peso do produto(UN): ");
-                    peso = entrada.nextFloat();
-                    produtos.atualizarProduto(new ProdutoAlimento(1, nome, marca, categoria, ID, quantidade, preco, peso));
+                    out.print("Nome do produto: ");
+                    entrada.skip("\\R?");
+                    nome = entrada.nextLine();
+                    atualizarItem.setNomeProduto(nome);
                 }
                 case 2 -> {
-                    out.print("Capacidade do produto(ML): ");
-                    ml = entrada.nextFloat();
-                    produtos.cadastrarProduto(new ProdutoBebida(2, nome, marca, categoria, ID, quantidade, preco, ml));
+                    out.print("Valor do produto(UN): ");
+                    preco = entrada.nextFloat();
+                    atualizarItem.setPrecoProduto(preco);
+                }
+                case 3 -> {
+                    out.print("Quantidade do produto(UN): ");
+                    quantidade = entrada.nextInt();
+                    atualizarItem.setQuantidadeProduto(quantidade);
+                }
+                case 4 -> {
+                    out.print("Marca do produto: ");
+                    entrada.skip("\\R?");
+                    marca = entrada.nextLine();
+                    atualizarItem.setMarcaProduto(marca);
+                }
+                case 5 -> {
+                    out.print("Categoria do produto: ");
+                    entrada.skip("\\R?");
+                    categoria = entrada.nextLine();
+                    atualizarItem.setCategoriaProduto(categoria);
+                }
+                case 6 -> {
+                    if (tipo == 1){
+                        out.print("Peso do produto(UN): ");
+                        peso = entrada.nextFloat();
+                    }else {
+                        out.print("Capacidade do produto(ML): ");
+                        ml = entrada.nextFloat();
+                    }
+                }
+            }
+            out.println(tipo);
+            switch (tipo) {
+                case 1 -> {
+                    produtos.atualizarProduto(new ProdutoAlimento(1, atualizarItem.getNomeProduto(), atualizarItem.getMarcaProduto(), atualizarItem.getCategoriaProduto(), atualizarItem.getCodProduto(), atualizarItem.getQuantidadeProduto(), atualizarItem.getPrecoProduto(), peso));
+                }
+                case 2 -> {
+                    produtos.atualizarProduto(new ProdutoBebida(2, atualizarItem.getNomeProduto(), atualizarItem.getMarcaProduto(), atualizarItem.getCategoriaProduto(), atualizarItem.getCodProduto(), atualizarItem.getQuantidadeProduto(), atualizarItem.getPrecoProduto(), ml));
                 }
             }
         }
@@ -211,7 +244,6 @@ public class Menu {
         for (int i = 0; i < qnt; i++) {
             e += " ";
         }
-        out.println("\n");
         out.println(e + txt);
     }
 }

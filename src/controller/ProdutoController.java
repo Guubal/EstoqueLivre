@@ -34,7 +34,6 @@ public class ProdutoController implements ProdutoRepository {
             produto.VisualizarAtualizar();
         } else {
             out.printf("O produto de ID %d não foi encontrado!", ID);
-            ;
         }
     }
 
