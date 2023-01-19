@@ -1,11 +1,11 @@
 package model;
 import static java.lang.System.out;
 
-public class ProdutoBebida extends Produto{
+public class ProdutoBebida extends Produto {
     private float ml;
 
-    public ProdutoBebida(String nomeProduto, String marcaProduto, String categoriaProduto, int codProduto, int quantidadeProduto, float precoProduto, float ml) {
-        super(nomeProduto, marcaProduto, categoriaProduto, codProduto, quantidadeProduto, precoProduto);
+    public ProdutoBebida(int tipoProduto, String nomeProduto, String marcaProduto, String categoriaProduto, int codProduto, int quantidadeProduto, float precoProduto, float ml) {
+        super(tipoProduto, nomeProduto, marcaProduto, categoriaProduto, codProduto, quantidadeProduto, precoProduto);
         this.ml = ml;
     }
 
@@ -19,9 +19,9 @@ public class ProdutoBebida extends Produto{
     }
 
     @Override
-    public void Visualizar(){
+    public void Visualizar() {
         super.Visualizar();
-        out.printf("\n%-15s %.2f\n","ML:", ml);
+        out.printf("\n%-15s %.2f\n", "ML:", ml);
         out.println("-".repeat(40));
     }
 }
