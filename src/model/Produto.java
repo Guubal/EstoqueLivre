@@ -82,7 +82,6 @@ public abstract class Produto {
 
     public void Visualizar() {
 
-        out.printf("\n\n");
         out.printf("-".repeat(40));
         out.printf("\n%-15s %s", "Produto:", nomeProduto);
         out.printf("\n%-15s %.2f", "Preço:", precoProduto);
@@ -94,7 +93,6 @@ public abstract class Produto {
 
     public void VisualizarAtualizar() {
 
-        out.printf("\n\n");
         out.printf("-".repeat(40));
         out.printf("\n[1]%-15s %s", "Produto:", nomeProduto);
         out.printf("\n[2]%-15s %.2f", "Preço:", precoProduto);

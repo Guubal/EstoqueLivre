@@ -49,33 +49,33 @@ public class Menu {
                     centerText("CADASTRAR PRODUTO");
                     cadastrarProdutos();
                     clearConsole();
+
                 }
                 case 2 -> {
-                    out.println("\n\nListar todos os Produtos");
+                    centerText("LISTAR TODOS OS PRODUTOS");
                     listarProduto();
-                    keyPress();
                     clearConsole();
                 }
                 case 3 -> {
-                    out.println("\n\nBuscar por produto");
+                    centerText("BUSCAR POR PRODUTO");
                     procurarPorID();
                     keyPress();
                     clearConsole();
                 }
                 case 4 -> {
-                    out.println("\n\nAtualizar dados do produto");
+                    centerText("Atualizar dados do produto");
                     atualizarProduto();
                     keyPress();
                     clearConsole();
                 }
                 case 5 -> {
-                    out.println("\n\nApagar produto");
+                    centerText("Apagar produto");
                     deletarProduto();
                     keyPress();
                     clearConsole();
                 }
                 case 6 -> {
-                    out.println("\nObrigado!");
+                    centerText("Obrigado!");
                     entrada.close();
                     System.exit(0);
                 }
@@ -134,6 +134,7 @@ public class Menu {
     }
 
     public static void procurarPorID() {
+        out.println("=".repeat(40));
         out.print("Digite o ID do produto: ");
         ID = entrada.nextInt();
         produtos.procurarProduto(ID);
@@ -142,12 +143,16 @@ public class Menu {
     public static void listarProduto(){
         produtos.listarProdutos();
 
+        keyPress();
+
     }
 
     public static void atualizarProduto() {
         int opc;
+        out.println("=".repeat(40));
         out.print("Digete o ID do produto: ");
         ID = entrada.nextInt();
+        clearConsole();
         produtos.listarProdutosAtualizar(ID);
         var atualizarItem = produtos.buscarNaCollection(ID);
 
@@ -213,6 +218,7 @@ public class Menu {
     }
 
     public static void deletarProduto() {
+        out.println("=".repeat(40));
         out.print("Digite o ID do produto: ");
         ID = entrada.nextInt();
         produtos.deletarProduto(ID);
@@ -232,7 +238,8 @@ public class Menu {
             if (System.getProperty("os.name").contains("Windows")) {
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             } else {
-                System.out.print("\033\143");
+                out.print("\033\143");
+                out.flush();
             }
         } catch (IOException | InterruptedException ex) {
         }
