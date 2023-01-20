@@ -152,7 +152,7 @@ public class Menu {
     public static void atualizarProduto() {
         int opc;
         out.println("=".repeat(40));
-        out.print("Digete o ID do produto: ");
+        out.print("Digite o ID do produto: ");
         ID = entrada.nextInt();
         clearConsole();
         produtos.listarProdutosAtualizar(ID);
@@ -160,7 +160,7 @@ public class Menu {
 
         var atualizarItemUN = produtos.buscarNaCollection(ID);
 
-        out.print("Digete a opcão que deseja alterar: ");
+        out.print("Digite a opcão que deseja alterar: ");
         opc = entrada.nextInt();
 
 
